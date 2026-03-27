@@ -11,29 +11,49 @@ function shouldRevealRedaktören(value: string) {
 
 export default function Home() {
   const [text, setText] = useState('')
+  const [step, setStep] = useState(1)
   const revealed = shouldRevealRedaktören(text)
+  const canProceed = revealed && step === 1
 
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
       <section className="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center justify-center px-6 py-10">
-        <textarea
-          aria-label="Skrivytan"
-          autoFocus
-          value={text}
-          onChange={(event) => setText(event.target.value)}
-          placeholder="var ska man skriva?"
-          className="h-72 w-full resize-none border-0 bg-transparent text-center text-[clamp(1.02rem,1.3vw,1.32rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)] md:h-80"
-          spellCheck={false}
-        />
+        {step === 1 ? (
+          <textarea
+            aria-label="Skrivytan"
+            autoFocus
+            value={text}
+            onChange={(event) => setText(event.target.value)}
+            placeholder="var ska man skriva?"
+            className="h-[28rem] w-full resize-none border-0 bg-transparent text-center text-[clamp(1.02rem,1.3vw,1.32rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)] md:h-[32rem]"
+            spellCheck={false}
+          />
+        ) : (
+          <div className="flex min-h-[28rem] w-full flex-col items-center justify-center text-center md:min-h-[32rem]">
+            <p className="text-[0.65rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
+              Fortsättning
+            </p>
+            <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
+              Nästa del av seansen väntar.
+            </p>
+          </div>
+        )}
 
-        {revealed ? (
-          <aside className="mt-16 w-full max-w-xl text-center md:mt-20" aria-live="polite">
+        {revealed && step === 1 ? (
+          <aside className="mt-28 w-full max-w-xl text-center md:mt-36" aria-live="polite">
             <p className="text-[0.65rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
               Redaktören
             </p>
             <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
               Nu finns rummet.
             </p>
+            <button
+              type="button"
+              onClick={() => setStep(2)}
+              className="mt-8 inline-flex items-center justify-center border-0 bg-transparent px-4 py-2 text-[0.72rem] uppercase tracking-[0.34em] text-[var(--ink-muted)] outline-none transition-opacity hover:opacity-80 focus-visible:opacity-80"
+            >
+              Next
+            </button>
           </aside>
         ) : null}
       </section>
