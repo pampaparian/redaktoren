@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg: #f4eedf;
+  --ink: #171412;
+  --surface: rgba(255, 250, 242, 0.8);
+  --rule: rgba(23, 20, 18, 0.14);
+  --accent: #5a1025;
+  --accent-soft: #e2a0b7;
+  --light: rgba(214, 70, 78, 0.34);
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), transparent 26%),
+    radial-gradient(circle at 12% 12%, rgba(255,255,255,0.5), transparent 28%),
+    var(--bg);
+  color: var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(90, 16, 37, 0.2);
+}
+
+[data-theme='night'] {
+  --bg: #5a1025;
+  --ink: #f5c1d1;
+  --surface: rgba(84, 12, 34, 0.8);
+  --rule: rgba(245, 193, 209, 0.14);
+  --accent: #ff7ba5;
+  --accent-soft: #f5c1d1;
+  --light: rgba(214, 70, 78, 0.5);
+}
+
+[data-theme='night'] body,
+body[data-theme='night'] {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(214, 70, 78, 0.38), transparent 18%),
+    radial-gradient(circle at 76% 16%, rgba(255, 123, 165, 0.2), transparent 22%),
+    radial-gradient(circle at 50% 85%, rgba(214, 70, 78, 0.22), transparent 30%),
+    var(--bg);
+  color: var(--ink);
+}
+
+.corpus-mask {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+.corpus-mask-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
+}
+
+.editor-frame {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28) inset, 0 18px 50px rgba(23, 20, 18, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+[data-theme='night'] .editor-frame {
+  box-shadow: 0 0 0 1px rgba(245, 193, 209, 0.18) inset, 0 0 48px rgba(214, 70, 78, 0.26);
+}
