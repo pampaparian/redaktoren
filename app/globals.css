@@ -6,6 +6,7 @@
   color-scheme: light;
   --bg: #f4f0e8;
   --ink: #26231f;
+  --ink-soft: rgba(38, 35, 31, 0.78);
   --ink-muted: rgba(38, 35, 31, 0.46);
 }
 
@@ -37,6 +38,7 @@ textarea {
   color-scheme: dark;
   --bg: #241711;
   --ink: #f1bfd0;
+  --ink-soft: rgba(241, 191, 208, 0.84);
   --ink-muted: rgba(241, 191, 208, 0.56);
 }
 
@@ -45,6 +47,7 @@ textarea {
     color-scheme: dark;
     --bg: #241711;
     --ink: #f1bfd0;
+    --ink-soft: rgba(241, 191, 208, 0.84);
     --ink-muted: rgba(241, 191, 208, 0.56);
   }
 }
