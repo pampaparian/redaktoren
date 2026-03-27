@@ -22,12 +22,12 @@ export default function Home() {
           value={text}
           onChange={(event) => setText(event.target.value)}
           placeholder="var ska man skriva?"
-          className="h-48 w-full resize-none border-0 bg-transparent text-center text-[clamp(1.02rem,1.3vw,1.32rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)]"
+          className="h-72 w-full resize-none border-0 bg-transparent text-center text-[clamp(1.02rem,1.3vw,1.32rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)] md:h-80"
           spellCheck={false}
         />
 
         {revealed ? (
-          <aside className="mt-10 w-full max-w-xl text-center" aria-live="polite">
+          <aside className="mt-16 w-full max-w-xl text-center md:mt-20" aria-live="polite">
             <p className="text-[0.65rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
               Redaktören
             </p>
