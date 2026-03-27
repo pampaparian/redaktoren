@@ -6,7 +6,7 @@ export default function Home() {
           aria-label="Skrivytan"
           autoFocus
           placeholder="var ska man skriva?"
-          className="h-56 w-full max-w-3xl resize-none border-0 bg-transparent text-center text-[clamp(1.4rem,3vw,2.4rem)] leading-tight tracking-[-0.04em] outline-none placeholder:text-[var(--ink-muted)]"
+          className="h-48 w-full max-w-2xl resize-none border-0 bg-transparent text-center text-[clamp(1.05rem,1.35vw,1.35rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)]"
           spellCheck={false}
         />
       </section>

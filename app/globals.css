@@ -5,8 +5,8 @@
 :root {
   color-scheme: light;
   --bg: #f4f0e8;
-  --ink: #1f1d1a;
-  --ink-muted: rgba(31, 29, 26, 0.42);
+  --ink: #26231f;
+  --ink-muted: rgba(38, 35, 31, 0.46);
 }
 
 html,
@@ -30,21 +30,21 @@ textarea {
 }
 
 ::selection {
-  background: rgba(31, 29, 26, 0.12);
+  background: rgba(38, 35, 31, 0.12);
 }
 
 [data-theme='night'] {
   color-scheme: dark;
   --bg: #241711;
-  --ink: #f2bfd1;
-  --ink-muted: rgba(242, 191, 209, 0.56);
+  --ink: #f1bfd0;
+  --ink-muted: rgba(241, 191, 208, 0.56);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='day']) {
     color-scheme: dark;
     --bg: #241711;
-    --ink: #f2bfd1;
-    --ink-muted: rgba(242, 191, 209, 0.56);
+    --ink: #f1bfd0;
+    --ink-muted: rgba(241, 191, 208, 0.56);
   }
 }
