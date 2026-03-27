@@ -35,16 +35,16 @@ textarea {
 
 [data-theme='night'] {
   color-scheme: dark;
-  --bg: #17181b;
-  --ink: #f4f1ea;
-  --ink-muted: rgba(244, 241, 234, 0.42);
+  --bg: #241711;
+  --ink: #f2bfd1;
+  --ink-muted: rgba(242, 191, 209, 0.56);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='day']) {
     color-scheme: dark;
-    --bg: #17181b;
-    --ink: #f4f1ea;
-    --ink-muted: rgba(244, 241, 234, 0.42);
+    --bg: #241711;
+    --ink: #f2bfd1;
+    --ink-muted: rgba(242, 191, 209, 0.56);
   }
 }
