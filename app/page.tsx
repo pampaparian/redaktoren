@@ -8,9 +8,8 @@ const STEP_STORAGE_KEY = 'redaktoren:step'
 function shouldRevealRedaktören(value: string) {
   const trimmed = value.trim()
   if (!trimmed) return false
-  if (trimmed.includes('
-')) return true
-  return /[.!?](?:s|$)/.test(trimmed)
+  if (trimmed.includes('\n')) return true
+  return /[.!?](?:\s|$)/.test(trimmed)
 }
 
 export default function Home() {
