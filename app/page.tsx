@@ -1,19 +1,54 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+
+const TEXT_STORAGE_KEY = 'redaktoren:text'
+const STEP_STORAGE_KEY = 'redaktoren:step'
 
 function shouldRevealRedaktören(value: string) {
   const trimmed = value.trim()
   if (!trimmed) return false
-  if (trimmed.includes('\n')) return true
-  return /[.!?](?:\s|$)/.test(trimmed)
+  if (trimmed.includes('
+')) return true
+  return /[.!?](?:s|$)/.test(trimmed)
 }
 
 export default function Home() {
   const [text, setText] = useState('')
   const [step, setStep] = useState(1)
+  const [hydrated, setHydrated] = useState(false)
   const revealed = shouldRevealRedaktören(text)
-  const canProceed = revealed && step === 1
+
+  useEffect(() => {
+    const savedText = sessionStorage.getItem(TEXT_STORAGE_KEY)
+    const savedStep = sessionStorage.getItem(STEP_STORAGE_KEY)
+
+    if (savedText !== null) {
+      setText(savedText)
+    }
+
+    if (savedStep === '2') {
+      setStep(2)
+    }
+
+    setHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (!hydrated) return
+    sessionStorage.setItem(TEXT_STORAGE_KEY, text)
+  }, [text, hydrated])
+
+  useEffect(() => {
+    if (!hydrated) return
+    sessionStorage.setItem(STEP_STORAGE_KEY, String(step))
+  }, [step, hydrated])
+
+  function handleNext() {
+    sessionStorage.setItem(TEXT_STORAGE_KEY, text)
+    sessionStorage.setItem(STEP_STORAGE_KEY, '2')
+    setStep(2)
+  }
 
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
@@ -36,6 +71,14 @@ export default function Home() {
             <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
               Nästa del av seansen väntar.
             </p>
+            <div className="mt-8 w-full max-w-2xl rounded-[1.5rem] border border-[var(--ink-muted)]/15 bg-white/35 px-5 py-4 text-left backdrop-blur-sm">
+              <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[var(--ink-muted)]">
+                Text som skickades vidare
+              </p>
+              <p className="mt-3 whitespace-pre-wrap text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink)]">
+                {text || 'Ingen text sparad.'}
+              </p>
+            </div>
           </div>
         )}
 
@@ -49,7 +92,7 @@ export default function Home() {
             </p>
             <button
               type="button"
-              onClick={() => setStep(2)}
+              onClick={handleNext}
               className="mt-8 inline-flex items-center justify-center border-0 bg-transparent px-4 py-2 text-[0.72rem] uppercase tracking-[0.34em] text-[var(--ink-muted)] outline-none transition-opacity hover:opacity-80 focus-visible:opacity-80"
             >
               Next
