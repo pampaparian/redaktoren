@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -17,6 +19,12 @@
   --bubble-assistant-bg: rgba(250, 247, 241, 0.9);
   --bubble-assistant-ink: #1a1814;
   --error-ink: #8b6553;
+  --font-serif: 'EB Garamond', 'Garamond', 'Palatino Linotype', Georgia, serif;
+  --font-serif-alt: 'Cormorant Garamond', 'Garamond', serif;
+  --tracking-caps: 0.22em;
+  --tracking-wide: 0.12em;
+  --tracking-normal: 0.02em;
+  --leading-body: 1.85;
 }
 
 html,
@@ -29,6 +37,11 @@ body {
 
 body {
   min-height: 100vh;
+  font-family: var(--font-serif);
+  line-height: var(--leading-body);
+  letter-spacing: var(--tracking-normal);
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  text-rendering: optimizeLegibility;
 }
 
 * {

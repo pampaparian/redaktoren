@@ -2,7 +2,7 @@
 
 import { type FormEvent, type RefObject, useEffect, useRef, useState } from 'react'
 
-const SESSION_STORAGE_KEY = 'redaktoren:session-v3'
+const SESSION_STORAGE_KEY = 'redaktoren:session-v4'
 
 type Step = 1 | 2
 type ChatRole = 'user' | 'assistant'
@@ -139,6 +139,29 @@ function ChatPanel({
   )
 }
 
+function StageShell({
+  children,
+  active,
+  className = '',
+}: {
+  children: React.ReactNode
+  active: boolean
+  className?: string
+}) {
+  return (
+    <div
+      className={[
+        'absolute inset-0 transition-all duration-700 ease-out motion-reduce:transition-none',
+        active ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none translate-y-3 opacity-0',
+        className,
+      ].join(' ')}
+      aria-hidden={!active}
+    >
+      {children}
+    </div>
+  )
+}
+
 export default function Home() {
   const [text, setText] = useState('')
   const [step, setStep] = useState<Step>(1)
@@ -227,53 +250,82 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[var(--bg)] text-[var(--ink)]">
-      <section className="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center justify-center px-6 py-10">
-        {step === 1 ? (
-          <textarea
-            aria-label="Skrivytan"
-            autoFocus
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            placeholder="var ska man skriva?"
-            className="h-[28rem] w-full resize-none border-0 bg-transparent text-center text-[clamp(1.02rem,1.3vw,1.32rem)] leading-[1.55] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)] md:h-[32rem]"
-            spellCheck={false}
-          />
-        ) : (
-          <div className="flex min-h-[28rem] w-full flex-col items-center justify-center text-center md:min-h-[32rem]">
-            <p className="text-[0.65rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
-              Fortsättning
-            </p>
-            <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
-              Nästa del av seansen väntar.
-            </p>
-            <div className="mt-8 w-full max-w-2xl rounded-[1.5rem] border border-[var(--panel-border)] bg-[var(--panel-bg)] px-5 py-4 text-left backdrop-blur-sm">
-              <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[var(--ink-muted)]">
-                Text som skickades vidare
-              </p>
-              <p className="mt-3 whitespace-pre-wrap text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink)]">
-                {text || 'Ingen text sparad.'}
-              </p>
-            </div>
-          </div>
-        )}
+      <section className="mx-auto flex min-h-screen w-full max-w-6xl flex-col justify-center px-6 py-14 pb-44 md:px-10 md:py-16 md:pb-52">
+        <div className="mx-auto w-full max-w-4xl text-center">
+          <p className="text-[0.64rem] uppercase tracking-[0.44em] text-[var(--ink-muted)]">
+            ÆR PRESS
+          </p>
+          <h1 className="mt-5 font-[var(--font-serif-alt)] text-[clamp(2rem,3.4vw,3.4rem)] font-light leading-[1.08] tracking-[-0.05em] text-[var(--ink)]">
+            Redaktören
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-[clamp(0.96rem,1.06vw,1.12rem)] leading-[1.95] tracking-[-0.01em] text-[var(--ink-soft)]">
+            En lugn arbetsyta med luftig typografi, tydlig övergång och en varsam väg från första
+            rad till nästa del av seansen.
+          </p>
+        </div>
 
-        {revealed && step === 1 ? (
-          <aside className="mt-28 w-full max-w-xl text-center md:mt-36" aria-live="polite">
-            <p className="text-[0.65rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
-              Redaktören
-            </p>
-            <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
-              Nu finns rummet.
-            </p>
-            <button
-              type="button"
-              onClick={handleNext}
-              className="mt-8 inline-flex items-center justify-center border-0 bg-transparent px-4 py-2 text-[0.72rem] uppercase tracking-[0.34em] text-[var(--ink-muted)] outline-none transition-opacity hover:opacity-80 focus-visible:opacity-80"
-            >
-              Next
-            </button>
-          </aside>
-        ) : null}
+        <div className="relative mx-auto mt-14 w-full max-w-5xl min-h-[46rem] md:mt-16 md:min-h-[50rem]">
+          <StageShell active={step === 1}>
+            <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
+              <div className="w-full rounded-[2rem] border border-[var(--panel-border)] bg-[var(--panel-bg)] px-6 py-10 shadow-[var(--panel-shadow)] backdrop-blur-sm md:px-10 md:py-12">
+                <textarea
+                  aria-label="Skrivytan"
+                  autoFocus
+                  value={text}
+                  onChange={(event) => setText(event.target.value)}
+                  placeholder="var ska man skriva?"
+                  className="h-[28rem] w-full resize-none border-0 bg-transparent text-center font-[var(--font-serif-alt)] text-[clamp(1.02rem,1.28vw,1.28rem)] leading-[1.9] tracking-[-0.02em] outline-none placeholder:text-[var(--ink-muted)] md:h-[32rem]"
+                  spellCheck={false}
+                />
+              </div>
+
+              {revealed ? (
+                <aside
+                  className="mt-20 w-full max-w-xl text-center transition-all duration-700 ease-out md:mt-28"
+                  aria-live="polite"
+                >
+                  <p className="text-[0.64rem] uppercase tracking-[0.44em] text-[var(--ink-muted)]">
+                    Redaktören
+                  </p>
+                  <p className="mt-4 text-[clamp(0.96rem,1.05vw,1.08rem)] leading-[2] tracking-[-0.01em] text-[var(--ink-soft)]">
+                    Nu finns rummet.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    className="mt-8 inline-flex items-center justify-center border-0 bg-transparent px-4 py-2 text-[0.72rem] uppercase tracking-[0.34em] text-[var(--ink-muted)] transition-opacity hover:opacity-80 focus-visible:opacity-80"
+                  >
+                    Next
+                  </button>
+                </aside>
+              ) : null}
+            </div>
+          </StageShell>
+
+          <StageShell active={step === 2}>
+            <div className="mx-auto flex max-w-4xl flex-col items-center text-center">
+              <p className="text-[0.64rem] uppercase tracking-[0.44em] text-[var(--ink-muted)]">
+                Fortsättning
+              </p>
+              <h2 className="mt-5 font-[var(--font-serif-alt)] text-[clamp(1.5rem,2vw,2.2rem)] font-light leading-[1.15] tracking-[-0.04em] text-[var(--ink)]">
+                Nästa del av seansen
+              </h2>
+              <p className="mt-4 max-w-2xl text-[clamp(0.96rem,1.05vw,1.08rem)] leading-[1.95] tracking-[-0.01em] text-[var(--ink-soft)]">
+                Texten nedan behandlas nu som ett typesatt utdrag, med mer luft och mindre känsla
+                av rå HTML.
+              </p>
+
+              <article className="mt-14 w-full max-w-3xl rounded-[2rem] border border-[var(--panel-border)] bg-[var(--panel-bg)] px-7 py-10 text-left shadow-[var(--panel-shadow)] backdrop-blur-sm md:px-10 md:py-12">
+                <p className="text-[0.64rem] uppercase tracking-[0.44em] text-[var(--ink-muted)]">
+                  Föregående text
+                </p>
+                <div className="mt-6 whitespace-pre-wrap font-[var(--font-serif-alt)] text-[clamp(1.03rem,1.14vw,1.16rem)] leading-[2.15] tracking-[-0.01em] text-[var(--ink)]">
+                  {text || 'Ingen text sparad.'}
+                </div>
+              </article>
+            </div>
+          </StageShell>
+        </div>
       </section>
 
       <ChatPanel
