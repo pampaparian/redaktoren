@@ -1,6 +1,6 @@
 'use client'
 
-import { type FormEvent, useEffect, useRef, useState } from 'react'
+import { type FormEvent, type RefObject, useEffect, useRef, useState } from 'react'
 
 const SESSION_STORAGE_KEY = 'redaktoren:session-v3'
 
@@ -64,7 +64,7 @@ type ChatPanelProps = {
   error: string
   onDraftChange: (value: string) => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
-  messagesEndRef: React.RefObject<HTMLDivElement | null>
+  messagesEndRef: RefObject<HTMLDivElement>
 }
 
 function ChatPanel({
