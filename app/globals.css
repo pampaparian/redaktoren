@@ -4,10 +4,19 @@
 
 :root {
   color-scheme: light;
-  --bg: #f4f0e8;
-  --ink: #26231f;
-  --ink-soft: rgba(38, 35, 31, 0.78);
-  --ink-muted: rgba(38, 35, 31, 0.46);
+  --bg: #fdfcf8;
+  --ink: #1a1814;
+  --ink-soft: rgba(26, 24, 20, 0.8);
+  --ink-muted: rgba(26, 24, 20, 0.52);
+  --panel-bg: rgba(255, 253, 248, 0.76);
+  --panel-bg-strong: rgba(248, 244, 237, 0.95);
+  --panel-border: rgba(216, 212, 204, 0.92);
+  --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+  --bubble-user-bg: #201913;
+  --bubble-user-ink: #fdf8f0;
+  --bubble-assistant-bg: rgba(250, 247, 241, 0.9);
+  --bubble-assistant-ink: #1a1814;
+  --error-ink: #8b6553;
 }
 
 html,
@@ -31,23 +40,24 @@ textarea {
 }
 
 ::selection {
-  background: rgba(38, 35, 31, 0.12);
-}
-
-[data-theme='night'] {
-  color-scheme: dark;
-  --bg: #241711;
-  --ink: #f1bfd0;
-  --ink-soft: rgba(241, 191, 208, 0.84);
-  --ink-muted: rgba(241, 191, 208, 0.56);
+  background: rgba(26, 24, 20, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='day']) {
     color-scheme: dark;
     --bg: #241711;
-    --ink: #f1bfd0;
-    --ink-soft: rgba(241, 191, 208, 0.84);
-    --ink-muted: rgba(241, 191, 208, 0.56);
+    --ink: #f3eadf;
+    --ink-soft: rgba(243, 234, 223, 0.8);
+    --ink-muted: rgba(243, 234, 223, 0.6);
+    --panel-bg: rgba(43, 29, 22, 0.92);
+    --panel-bg-strong: rgba(54, 36, 28, 0.96);
+    --panel-border: rgba(96, 71, 56, 0.92);
+    --panel-shadow: 0 18px 42px rgba(0, 0, 0, 0.3);
+    --bubble-user-bg: #3b271e;
+    --bubble-user-ink: #fdf8f0;
+    --bubble-assistant-bg: #4a3025;
+    --bubble-assistant-ink: #fdf8f0;
+    --error-ink: #cfb09d;
   }
 }

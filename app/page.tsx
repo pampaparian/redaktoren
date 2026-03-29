@@ -77,7 +77,7 @@ function ChatPanel({
   messagesEndRef,
 }: ChatPanelProps) {
   return (
-    <aside className="fixed bottom-4 left-4 right-4 z-20 rounded-[1.5rem] border border-[var(--ink-muted)]/16 bg-white/45 p-4 shadow-[0_14px_40px_rgba(0,0,0,0.08)] backdrop-blur-md md:left-auto md:right-5 md:w-[22rem]">
+    <aside className="fixed bottom-4 left-4 right-4 z-20 rounded-[1.5rem] border border-[var(--panel-border)] bg-[var(--panel-bg)] p-4 text-[var(--ink)] shadow-[var(--panel-shadow)] backdrop-blur-md md:left-auto md:right-5 md:w-[22rem]">
       <div className="flex items-start justify-between gap-3">
         <div>
           <p className="text-[0.62rem] uppercase tracking-[0.42em] text-[var(--ink-muted)]">
@@ -87,12 +87,12 @@ function ChatPanel({
             En kompakt chat för att hålla sidan aktiv.
           </p>
         </div>
-        <span className="rounded-full border border-[var(--ink-muted)]/15 px-2 py-1 text-[0.58rem] uppercase tracking-[0.28em] text-[var(--ink-muted)]">
+        <span className="rounded-full border border-[var(--panel-border)] px-2 py-1 text-[0.58rem] uppercase tracking-[0.28em] text-[var(--ink-muted)]">
           Gemini
         </span>
       </div>
 
-      <div className="mt-3 max-h-36 space-y-2 overflow-y-auto rounded-[1.2rem] border border-[var(--ink-muted)]/10 bg-white/35 p-3 text-[0.86rem] leading-6 text-[var(--ink)]">
+      <div className="mt-3 max-h-36 space-y-2 overflow-y-auto rounded-[1.2rem] border border-[var(--panel-border)] bg-[var(--panel-bg-strong)] p-3 text-[0.86rem] leading-6 text-[var(--ink)]">
         {messages.length === 0 ? (
           <p className="text-[var(--ink-muted)]">
             Fråga om ton, struktur, nästa steg eller vad som saknas i texten.
@@ -103,8 +103,8 @@ function ChatPanel({
               key={`${message.role}-${index}`}
               className={
                 message.role === 'user'
-                  ? 'ml-auto max-w-[85%] rounded-2xl bg-[var(--ink)] px-3 py-2 text-[var(--bg)]'
-                  : 'max-w-[90%] rounded-2xl bg-white/70 px-3 py-2 text-[var(--ink)]'
+                  ? 'ml-auto max-w-[85%] rounded-2xl bg-[var(--bubble-user-bg)] px-3 py-2 text-[var(--bubble-user-ink)]'
+                  : 'max-w-[90%] rounded-2xl border border-[var(--panel-border)] bg-[var(--bubble-assistant-bg)] px-3 py-2 text-[var(--bubble-assistant-ink)]'
               }
             >
               {message.content}
@@ -121,19 +121,19 @@ function ChatPanel({
           onChange={(event) => onDraftChange(event.target.value)}
           placeholder="Ställ en följdfråga"
           rows={2}
-          className="min-h-[3rem] flex-1 resize-none rounded-2xl border border-[var(--ink-muted)]/15 bg-white/60 px-3 py-2 text-[0.84rem] leading-5 outline-none placeholder:text-[var(--ink-muted)] focus:border-[var(--ink-muted)]/28"
+          className="min-h-[3rem] flex-1 resize-none rounded-2xl border border-[var(--panel-border)] bg-[var(--panel-bg-strong)] px-3 py-2 text-[0.84rem] leading-5 text-[var(--ink)] outline-none placeholder:text-[var(--ink-muted)] focus:border-[var(--ink-muted)]/30"
         />
         <button
           type="submit"
           disabled={sending || !draft.trim()}
-          className="self-end rounded-2xl border border-[var(--ink-muted)]/15 px-3 py-2 text-[0.64rem] uppercase tracking-[0.24em] text-[var(--ink-muted)] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
+          className="self-end rounded-2xl border border-[var(--panel-border)] px-3 py-2 text-[0.64rem] uppercase tracking-[0.24em] text-[var(--ink-muted)] transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
         >
           {sending ? '...' : 'Skicka'}
         </button>
       </form>
 
       {error ? (
-        <p className="mt-2 text-[0.72rem] leading-5 text-[#8a3d52]">{error}</p>
+        <p className="mt-2 text-[0.72rem] leading-5 text-[var(--error-ink)]">{error}</p>
       ) : null}
     </aside>
   )
@@ -246,7 +246,7 @@ export default function Home() {
             <p className="mt-4 text-[clamp(0.95rem,1.05vw,1.08rem)] leading-7 text-[var(--ink-soft)]">
               Nästa del av seansen väntar.
             </p>
-            <div className="mt-8 w-full max-w-2xl rounded-[1.5rem] border border-[var(--ink-muted)]/15 bg-white/35 px-5 py-4 text-left backdrop-blur-sm">
+            <div className="mt-8 w-full max-w-2xl rounded-[1.5rem] border border-[var(--panel-border)] bg-[var(--panel-bg)] px-5 py-4 text-left backdrop-blur-sm">
               <p className="text-[0.65rem] uppercase tracking-[0.34em] text-[var(--ink-muted)]">
                 Text som skickades vidare
               </p>
